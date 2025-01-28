@@ -19,6 +19,8 @@ This repository contains scripts for easy orchestration of the Vola Aggregator N
 - **ACCOUNT**: Address of the owner account.
 - **SURI**: Secret phrase for account key generation.
 - **KEYSTORE_PASSWORD**: Password for the keystore.
+- **SWARM_KEY**: Optional. Specifies the swarm key for private networks. Default is unset.
+- **LIBP2P_FORCE_PNET**: Optional. Forces the use of a private network. Default is `false`.
 
 Ensure that these variables are properly configured to match your environment and security requirements.
 
