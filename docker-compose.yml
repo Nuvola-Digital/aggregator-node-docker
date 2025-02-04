@@ -3,14 +3,14 @@ services:
     image: ipfs/kubo:latest
     container_name: ipfs-kubo
     environment:
-      - SWARM_KEY=${SWARM_KEY:-}         
+      - SWARM_KEY=${SWARM_KEY:-}
       - LIBP2P_FORCE_PNET=${LIBP2P_FORCE_PNET:-false}
     volumes:
-      - ./ipfs-data:/data/ipfs          
+      - ./ipfs-data:/data/ipfs
     ports:
-      - "4001:4001"                     
-      - "127.0.0.1:8080:8080"           
-      - "127.0.0.1:5001:5001"           
+      - "4001:4001"
+      - "127.0.0.1:8080:8080"
+      - "127.0.0.1:5001:5001"
     command: daemon
     restart: unless-stopped
 
@@ -23,11 +23,11 @@ services:
       - ./entry.sh:/entry.sh
     depends_on:
       - ipfs-kubo
-    network_mode: service:ipfs-kubo      
+    network_mode: service:ipfs-kubo
     environment:
-      - LISTEN_IP=${LISTEN_IP:-127.0.0.1}       
-      - LISTEN_PORT=${LISTEN_PORT:-1331}        
-      - ACCOUNT=${ACCOUNT} 
+      - LISTEN_ADDR=${LISTEN_ADDR:-127.0.0.1}
+      - LISTEN_PORT=${LISTEN_PORT:-1331}
+      - ACCOUNT=${ACCOUNT}
       - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
       - SURI=${SURI}
     restart: unless-stopped
