@@ -2,20 +2,17 @@ services:
   ipfs-kubo:
     image: ipfs/kubo:latest
     container_name: ipfs-kubo
-    environment:
-      - SWARM_KEY=${SWARM_KEY:-}
-      - LIBP2P_FORCE_PNET=${LIBP2P_FORCE_PNET:-false}
     volumes:
-      - ./ipfs-data:/data/ipfs
+      - ipfs_data:/data/ipfs
+      - ./001-ipfs-config.sh:/container-init.d/001-ipfs-config.sh
     ports:
       - "4001:4001"
       - "127.0.0.1:8080:8080"
       - "127.0.0.1:5001:5001"
-    command: daemon
     restart: unless-stopped
 
   aggregator-node:
-    image: ngittech/aggregator-node:latest
+    image: nuvoladigital/aggregator-node:latest
     container_name: aggregator-node
     entrypoint: ["/entry.sh"]
     volumes:
@@ -34,3 +31,5 @@ services:
 volumes:
   vola_data:
     name: aggregator_testnet_data
+  ipfs_data:
+    name: aggregator_testnet_storage
