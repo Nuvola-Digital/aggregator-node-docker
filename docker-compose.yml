@@ -3,7 +3,7 @@ services:
     image: ipfs/kubo:latest
     container_name: ipfs-kubo
     volumes:
-      - ipfs_data:/data/ipfs
+      - ./ipfs_data:/data/ipfs
       - ./001-ipfs-config.sh:/container-init.d/001-ipfs-config.sh
     ports:
       - "4001:4001"
@@ -27,9 +27,8 @@ services:
       - ACCOUNT=${ACCOUNT}
       - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
       - SURI=${SURI}
+      - CHAIN_RPC=${CHAIN_RPC}
     restart: unless-stopped
 volumes:
   vola_data:
-    name: aggregator_testnet_data
-  ipfs_data:
-    name: aggregator_testnet_storage
+    name: aggregator_devnet_data
