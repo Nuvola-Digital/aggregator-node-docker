@@ -6,9 +6,7 @@ services:
       - ./ipfs_data:/data/ipfs
       - ./001-ipfs-config.sh:/container-init.d/001-ipfs-config.sh
     ports:
-      - "4001:4001"
-      - "127.0.0.1:8080:8080"
-      - "127.0.0.1:5001:5001"
+      - "$LISTEN_PORT:$LISTEN_PORT"
     restart: unless-stopped
 
   aggregator-node:
