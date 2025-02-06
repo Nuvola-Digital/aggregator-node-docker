@@ -19,6 +19,7 @@ This repository contains scripts for easy orchestration of the Vola Aggregator N
 - **ACCOUNT**: Address of the owner account.
 - **SURI**: Secret phrase for account key generation.
 - **KEYSTORE_PASSWORD**: Password for the keystore.
+- **CHAIN_RPC**: RPC for vola chain devnet.
 
 Ensure that these variables are properly configured to match your environment and security requirements.
 
