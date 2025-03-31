@@ -1,2 +1,5 @@
 .env
 ipfs_data/
+
+nginx/
+certbot/
