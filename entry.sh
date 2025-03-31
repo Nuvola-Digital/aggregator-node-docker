@@ -29,7 +29,7 @@ if [ -z "${KEYSTORE_PASSWORD+x}" ] || [ -z "$KEYSTORE_PASSWORD" ]; then
     fi
     # 🌐 Run the Aggregator Node
     echo -e "⚡ \033[1;35mStarting Aggregator Node...\033[0m"
-    if ! /usr/local/bin/aggregator-node run --dev --listen-addr "${LISTEN_ADDR}" --listen-port "${LISTEN_PORT}" --address "${ACCOUNT}" --chain-rpc "${CHAIN_RPC}"; then
+    if ! /usr/local/bin/aggregator-node run --dev --listen-addr "${LISTEN_ADDR}" --listen-port "${LISTEN_PORT}" --address "${ACCOUNT}" --chain-rpc "${CHAIN_RPC}" --tmp-storage-dir "/tmp/vola/" --ipfs-rpc-addr "192.168.1.4" --ipfs-gateway-addr "192.168.1.4"; then
         echo -e "❌ \033[1;31mFailed to start the Aggregator Node. Please check your configuration and try again.\033[0m"
         exit 1
     fi

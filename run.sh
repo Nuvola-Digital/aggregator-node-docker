@@ -136,12 +136,13 @@ server {
 server {
     listen 443 ssl;
     server_name $GATEWAY_DOMAIN;
+    client_max_body_size 50M;
 
     ssl_certificate /etc/letsencrypt/live/$GATEWAY_DOMAIN/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/$GATEWAY_DOMAIN/privkey.pem;
 
     location / {
-        proxy_pass http://192.168.1.5:1331;
+        proxy_pass http://192.168.1.5:$LISTEN_PORT;
     }
 }
 
