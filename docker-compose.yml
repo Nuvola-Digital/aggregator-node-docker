@@ -20,7 +20,8 @@ services:
       - ./ipfs_data:/data/ipfs
       - ./001-ipfs-config.sh:/container-init.d/001-ipfs-config.sh:ro
     ports:
-      - "5001:5001"
+      - "4001:4001"
+      - "4001:4001/udp"
     restart: unless-stopped
     networks:
       app_network:
@@ -32,6 +33,7 @@ services:
     entrypoint: ["/entry.sh"]
     volumes:
       - vola_data:/data
+      - ./tmp_aggregation_data:/tmp/vola
       - ./entry.sh:/entry.sh:ro
     depends_on:
       - ipfs-kubo

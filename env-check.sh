@@ -19,7 +19,6 @@ REQUIRED_VARS=(
     [KEYSTORE_PASSWORD]="Password for the keystore."
     [CHAIN_RPC]="RPC endpoint for Vola Chain."
     [STORAGE_CAPACITY]="Amount of storage in GB to offer to the network."
-    [NODE_LOCATION]="Geographical location where the node is running."
     [GATEWAY_DOMAIN]="Public domain pointing to the aggregator node."
     [GATEWAY_PORT]="SSL port for accessing the node."
 )

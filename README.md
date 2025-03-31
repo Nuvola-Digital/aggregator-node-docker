@@ -45,8 +45,6 @@ cd aggregator-node-docker
         RPC for vola chain devnet.
       - **STORAGE_CAPACITY**:
         Amount of storage in GB to offer to the network.
-      - **NODE_LOCATION**:
-        Location where the node is running.
       - **GATEWAY_DOMAIN**:
         Public domain that points to the running aggregator node. Also need to be configured for https (SSL) support.
         The aggregator node listening at **_$LISTEN_ADDR:$LISTEN_PORT_** should be accessible through **_https://$GATEWAY_DOMAIN:$GATEWAY_PORT_** with https.
@@ -85,7 +83,7 @@ cd aggregator-node-docker
 
           ```bash
             source .env
-            docker exec -it aggregator-node /usr/local/bin/aggregator-node register --chain-rpc $CHAIN_RPC --address $ACCOUNT --gateway $GATEWAY_DOMAIN --gateway-port $GATEWAY_PORT --capacity $STORAGE_CAPACITY --location $NODE_LOCATION
+            docker exec -it aggregator-node /usr/local/bin/aggregator-node register --chain-rpc $CHAIN_RPC --address $ACCOUNT --gateway $GATEWAY_DOMAIN --gateway-port $GATEWAY_PORT --capacity $STORAGE_CAPACITY
           ```
 
     After the registration is completed, your node can start receiving upload requests.
