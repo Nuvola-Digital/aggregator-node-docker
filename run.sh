@@ -22,14 +22,14 @@ function print_msg() {
 }
 
 # Run the environment check script
-print_msg "$COLOR_BLUE" "Running environment check..."
+print_msg "$COLOR_BLUE" "Running environment check...\n"
 bash "$CHECK_SCRIPT"
 
 # Capture the exit code
 EXIT_CODE=$?
 
 if [[ $EXIT_CODE -ne 0 ]]; then
-    print_msg "$COLOR_RED" "Please fix the .env file before proceeding."
+    print_msg "$COLOR_RED" "Please fix the .env file before proceeding.\n"
     exit 1
 fi
 
@@ -39,39 +39,39 @@ source .env
 source banner.sh
 set +o allexport
 if [[ "$1" == "--detach" ]]; then
-    print_msg "$COLOR_YELLOW" "Running in detached mode..."
+    print_msg "$COLOR_YELLOW" "Running in detached mode...\n"
 else
-    print_msg "$COLOR_YELLOW" "Running in foreground mode..."
+    print_msg "$COLOR_YELLOW" "Running in foreground mode...\n"
   
 fi
 # Check if required variables are set
 if [[ -z "$GATEWAY_DOMAIN" ]]; then
-    print_msg "$COLOR_RED" "Error: GATEWAY_DOMAIN is not set. Please export GATEWAY_DOMAIN or set it before running the script."
+    print_msg "$COLOR_RED" "Error: GATEWAY_DOMAIN is not set. Please export GATEWAY_DOMAIN or set it before running the script.\n"
     exit 1
 fi
 
 # Check if Docker is installed and running
 if ! command -v docker &> /dev/null; then
-    print_msg "$COLOR_RED" "Error: Docker is not installed. Please install Docker first." >&2
+    print_msg "$COLOR_RED" "Error: Docker is not installed. Please install Docker first.\n" >&2
     exit 1
 fi
 
 if ! docker info &>/dev/null; then
-    print_msg "$COLOR_YELLOW" "Docker is installed but not running. Please start the Docker service."
-    read -p "Do you want to try starting Docker? (y/n): " start_docker
+    print_msg "$COLOR_YELLOW" "Docker is installed but not running. Please start the Docker service.\n"
+    read -p "Do you want to try starting Docker? (y/n)>>>" start_docker
     if [[ $start_docker == [Yy] ]]; then
         if [[ "$(uname -s)" == "Linux" ]]; then
             systemctl start docker
         elif [[ "$(uname -s)" == "Darwin" ]]; then
             open --background -a Docker
         else
-            print_msg "$COLOR_RED" "Please manually start Docker."
+            print_msg "$COLOR_RED" "Please manually start Docker.\n"
             exit 1
         fi
         
         # Re-check Docker status
         if ! docker info &>/dev/null; then
-            print_msg "$COLOR_RED" "Failed to start Docker. Please manually start it."
+            print_msg "$COLOR_RED" "Failed to start Docker. Please manually start it.\n"
             exit 1
         fi
     else
@@ -87,11 +87,11 @@ print_msg "$COLOR_CYAN" "\nEnter your email address (Let's Encrypt will send you
 read -r EMAIL
 
 # Pull the latest Certbot image
-print_msg "$COLOR_BLUE" "Pulling the latest Certbot image..."
+print_msg "$COLOR_BLUE" "Pulling the latest Certbot image...\n"
 docker pull certbot/certbot:latest
 # echo "Creating Volume for certbot"
 # docker volume create certbot-data
-print_msg "$COLOR_GREEN" "Trying to obtain SSL certificate for domain $GATEWAY_DOMAIN..."
+print_msg "$COLOR_GREEN" "Trying to obtain SSL certificate for domain $GATEWAY_DOMAIN...\n"
 docker run --rm \
 -p 80:80 \
 -v "$(pwd)/certbot/config:/etc/letsencrypt" \
@@ -118,12 +118,12 @@ if [ $? -ne 0 ]; then
     -d "$GATEWAY_DOMAIN"
 
     if [ $? -ne 0 ]; then
-        print_msg "$COLOR_RED" "Failed to obtain SSL certificate. Please try again."
+        print_msg "$COLOR_RED" "Failed to obtain SSL certificate. Please try again.\n"
         exit 1
     fi
 fi
 
-print_msg "$COLOR_GREEN" "Certificate obtained successfully. Setting up NGINX container..."
+print_msg "$COLOR_GREEN" "Certificate obtained successfully. Setting up NGINX container...\n"
 
 # Create a basic NGINX configuration for SSL
 cat > "$NGINX_CONFIG_DIR/default.conf" <<EOL
@@ -148,14 +148,14 @@ server {
 EOL
 
 # Remove the Certbot image
-print_msg "$COLOR_YELLOW" "Removing Certbot Docker image..."
+print_msg "$COLOR_YELLOW" "Removing Certbot Docker image...\n"
 docker rmi certbot/certbot:latest
 
 # Check if --detach argument is passed
 if [[ "$1" == "--detach" ]]; then
-    print_msg "$COLOR_BLUE" "Running Docker Compose in detached mode..."
+    print_msg "$COLOR_BLUE" "Running Docker Compose in detached mode...\n"
     docker compose up -d
 else
-    print_msg "$COLOR_BLUE" "Running Docker Compose..."
+    print_msg "$COLOR_BLUE" "Running Docker Compose...\n"
     docker compose up
 fi

@@ -16,7 +16,6 @@ REQUIRED_VARS=(
     [LISTEN_PORT]="Port where the Aggregator Node will listen."
     [ACCOUNT]="SS58 Address format for the account."
     [SURI]="Secret URI for the account."
-    [KEYSTORE_PASSWORD]="Password for the keystore."
     [CHAIN_RPC]="RPC endpoint for Vola Chain."
     [STORAGE_CAPACITY]="Amount of storage in GB to offer to the network."
     [GATEWAY_DOMAIN]="Public domain pointing to the aggregator node."
