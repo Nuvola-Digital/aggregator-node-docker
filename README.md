@@ -164,12 +164,9 @@ The project consists of multiple scripts and configurations that work together t
         
 -   **Manually Renewing SSL Certificates:**
     
-    -   The setup script automatically handles SSL, but if renewal is required, run:
+    -   The setup script automatically handles SSL, but if renewal is required, you can run setup.sh again.
         
-        ```bash
-        docker run --rm -v $(pwd)/certbot/config:/etc/letsencrypt certbot/certbot renew
-        
-        ```
+   
         
 -   **Running in Detached Mode:**
     
