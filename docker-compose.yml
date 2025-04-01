@@ -33,7 +33,6 @@ services:
     entrypoint: ["/entry.sh"]
     volumes:
       - vola_data:/data
-      - ./tmp_aggregation_data:/tmp/vola
       - ./entry.sh:/entry.sh:ro
     depends_on:
       - ipfs-kubo
