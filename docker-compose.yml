@@ -28,7 +28,7 @@ services:
         ipv4_address: 192.168.1.4
 
   aggregator-node:
-    image: nuvoladigital/aggregator-node:latest
+    image: nuvoladigital/aggregator-node:${DOCKER_IMAGE_VERSION:-latest}
     container_name: aggregator-node
     entrypoint: ["/entry.sh"]
     volumes:
